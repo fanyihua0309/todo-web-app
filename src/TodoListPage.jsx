@@ -109,9 +109,6 @@ const TodoListPage = () => {
         content = curItem.content;
       }
     })
-    console.log("id", id);
-    console.log("content", content);
-    console.log("complete", !original_complete);
     axiosInst
       .patch("/todos", {
         id,
@@ -131,7 +128,6 @@ const TodoListPage = () => {
     axiosInst
       .get("/todos")
       .then((res) => {
-        // console.log("res", res);
         settodoItems([]);
         res.map((curItem) => {
           const newItem = new TodoItem(curItem.content);
@@ -214,7 +210,7 @@ const TodoListPage = () => {
       </Content>
       <Footer style={{backgroundColor: "lightblue"}}>
         <footer id="footer">
-          <div class="copyright" style={{textAlign: "center"}}>
+          <div className="copyright" style={{textAlign: "center"}}>
             &copy; Copyright <em>Fan Yihua</em>. All Rights Reserved.
              Contact me through <em>nuaaccstfyh@163.com</em>
           </div>

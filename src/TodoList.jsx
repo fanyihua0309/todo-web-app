@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
-
 import { Button, Input } from 'antd';
 import { Table, Space } from 'antd';
 import './App.less'
 import axios from "axios"
+import ModalContent from "./ModalContent.jsx"
 
 const axiosInst = axios.create({
   baseURL: "http://42.193.140.83:3000",
@@ -26,6 +26,7 @@ axiosInst.interceptors.response.use(
     return Promise.reject(errors);
   }
 );
+
 
 const TodoList = ({todoItems, onClickEditBtn, onClickEditSubmitBtn, onClickDeleteBtn, onClickCompleteBtn}) => {
 
@@ -67,14 +68,21 @@ const TodoList = ({todoItems, onClickEditBtn, onClickEditSubmitBtn, onClickDelet
       render: (text, record) => {
         return (
           record.edit ? 
-          (<div>
-            <Input type="text" allowClear value={editContent} onChange={storeEditContent}/>
-            <Button type="primary" onClick={() => handleEditSubmit(record.id)}>提交</Button>
-          </div>)
+          (
+            <div>
+              <Input type="text" allowClear value={editContent} onChange={storeEditContent}/>
+              <Button type="primary" onClick={() => handleEditSubmit(record.id)}>提交</Button>
+            </div>
+          )
           :
-            (<span style={{textDecoration: (record.complete ? "line-through" : "none")}}>
-              {text}
-            </span>)
+          (
+            <div>
+              <span style={{textDecoration: (record.complete ? "line-through" : "none")}}>
+                {text}
+              </span>
+              <ModalContent content={text} isComplete={record.complete} />
+            </div>
+          )
         )
       }
     },
@@ -102,6 +110,7 @@ const TodoList = ({todoItems, onClickEditBtn, onClickEditSubmitBtn, onClickDelet
         columns={columns} 
         dataSource={todoItems.filter((curItem) => {return curItem.show === true;})} 
         pagination={{position: ["topLeft"], pageSize: 4, showQuickJumper: true}}
+        rowKey="id"
         id="table"
       />
     </div>

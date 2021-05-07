@@ -1,30 +1,7 @@
 import React from 'react';
 import { Form, Input, Select, Button } from 'antd';
 import { useHistory } from "react-router-dom";
-import axios from "axios"
-
-
-const axiosInst = axios.create({
-  baseURL: "http://42.193.140.83:3000",
-  timeout: 10000,
-});
-
-axiosInst.interceptors.response.use(
-  function (response) {
-    const {
-      meta : { code, errors },
-      data
-    } = response.data;
-    if(code !== 0){
-      alert(errors[0]);
-      return Promise.reject(errors);
-    }
-    return data;
-  },
-  function (errors) {
-    return Promise.reject(errors);
-  }
-)
+import { axiosInst } from "./TodoListPage.jsx"
 
 
 const { Option } = Select;

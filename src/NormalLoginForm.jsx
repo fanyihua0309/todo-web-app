@@ -2,46 +2,28 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
-import axios from "axios"
+import { axiosInst } from "./TodoListPage.jsx"
 
 const NormalLoginForm = () => {
-  const axiosInst = axios.create({
-      baseURL: "http://42.193.140.83:3000",
-      timeout: 10000,
-  });
-
-  axiosInst.interceptors.response.use(
-    function (response) {
-      const {
-        meta: { code, errors },
-        data,
-      } = response.data;
-      if (code !== 0) {
-        console.log("errors", errors[0]);
-        alert(errors[0]);
-        return Promise.reject(errors);
-      }
-      return data;
-    },
-    function (errors) {
-      console.log(errors);
-      return Promise.reject(errors);
-    }
-  );
 
   let history = useHistory();
 
   const onFinish = (values) => {
     axiosInst
       .post("/users/signin", {
-        "name": values.username,
+        "mobile": values.username,
         "password": values.password
       })
-      .then(() => {
+      .then((res) => {
+        if(res.token){
+          // 使用本地存储方案存储服务器返回的 token 
+          localStorage.setItem("token", "Bearer " + res.token); 
+        }
         history.push("/todolist");
       })
     // console.log('Received values of form: ', values);
   };
+
 
   return (
     <Form
@@ -57,11 +39,11 @@ const NormalLoginForm = () => {
         rules={[
           {
             required: true,
-            message: '请输入用户名!',
+            message: '请输入用户名(手机号)!',
           },
         ]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="用户名" />
+        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="用户名(手机号)" />
       </Form.Item>
       <Form.Item
         name="password"

@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
-
+// import history from 'history/browser';
+// import history from 'history/hash';
+import { createHashHistory } from 'history';
 import MyInput from './MyInput.jsx'
 import TodoList from './TodoList.jsx'
 import './App.less'
 import axios from "axios"
 import { Layout } from 'antd';
-
+import { message } from 'antd';
 
 const { Header, Footer, Content } = Layout;
 
 const axiosInst = axios.create({
-  baseURL: "http://42.193.140.83:3000",
+  baseURL: "http://42.193.140.83:3001",
   timeout: 10000,
 });
 
@@ -21,15 +23,25 @@ axiosInst.interceptors.response.use(
       data,
     } = response.data;
     if (code !== 0) {
-      alert(errors[0]);
+      message.info(errors[0]);
       return Promise.reject(errors);
     }
     return data;
   },
-  function (errors) {
-    return Promise.reject(errors);
+  function (error) {
+    if (error.response) {
+      if(error.response.data === "Forbidden"){
+        message.info("您尚未登录！\n请先登录！");
+      }
+    } 
+    let history = createHashHistory();
+    history.push("/login");
+    // history.back();
+    return Promise.reject(error);
   }
 );
+
+export { axiosInst }
 
 
 // 定义待办事项的类
@@ -85,7 +97,7 @@ const TodoListPage = () => {
     }
 
   /**
-   * 当用户点击删除按钮时，向服务器发 post 请求删除对应的待办事项
+   * 当用户点击删除按钮时，向服务器发 post 请求删除对应 id 的待办事项
    * @param {number} id 待删除待办事项的 id
    */
   const fetchDeleteTodoItem = (id) => {
@@ -98,7 +110,7 @@ const TodoListPage = () => {
   }
 
   /**
-   * 当用户点击完成/未完成按钮时, 发请求更新服务器端的数据
+   * 当用户点击完成/未完成按钮时, 更新服务器对应待办事项的完成状态，即 complete 的值
    * @param {number} id 当前待办事项的id
    */
   const fetchCompleteTodoItem = (id) => {
@@ -122,9 +134,11 @@ const TodoListPage = () => {
   }
 
   /**
-   * 请求所有数据存储到 todoItems 对象数组中
+   * 请求所有待办事项数据存储到 todoItems 对象数组中
    */
   const fetchAllTodoItems = () => {
+    axiosInst.defaults.headers.common['Authorization'] = localStorage.getItem("token");
+
     axiosInst
       .get("/todos")
       .then((res) => {
@@ -133,8 +147,6 @@ const TodoListPage = () => {
           const newItem = new TodoItem(curItem.content);
           newItem.id = curItem._id;
           newItem.complete = curItem.complete;
-          newItem.edit = curItem.edit;
-          newItem.show = curItem.match;
           settodoItems((preItem) => {
             return [...preItem, newItem];
           })
@@ -144,7 +156,7 @@ const TodoListPage = () => {
   }
   
   /**
-   * 在页面加载时发请求获取数据
+   * 在页面加载时发请求获取所有待办事项
    */
   useEffect(() => {
     fetchAllTodoItems();

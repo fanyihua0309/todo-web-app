@@ -1,6 +1,7 @@
 import React from "react";
 import {
-  BrowserRouter as Router,
+  // BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
@@ -19,11 +20,7 @@ function App() {
       <div>
         <Switch>
           <Route path="/login">
-            <SignPage formLable="欢 迎 登 录" render={<NormalLoginForm />} className="sign-page"/>
-          </Route>
-
-          <Route path="/todolist">
-            <TodoListPage id="todolist-page"/>
+            <SignPage formLable="欢 迎 登 录" render={<NormalLoginForm />} className="sign-page" />
           </Route>
 
           <Route path="/register/result">
@@ -32,6 +29,10 @@ function App() {
 
           <Route path="/register">
             <SignPage formLable="注 册 账 户" render={<RegistrationForm />} />
+          </Route>
+
+          <Route path="/todolist">
+            <TodoListPage id="todolist-page" />
           </Route>
 
           <Route path="/">  

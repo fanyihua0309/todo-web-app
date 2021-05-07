@@ -2,7 +2,7 @@ import "./App.less"
 import { Divider } from 'antd';
 
 
-const SignPage = ({ formLable, render }) => {
+const SignPage = ({ formLable, render, storeToken }) => {
 
   return (
     <div>

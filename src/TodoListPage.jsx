@@ -44,26 +44,9 @@ axiosInst.interceptors.response.use(
 export { axiosInst }
 
 
-// 定义待办事项的类
-class TodoItem{ 
-  id;       // id
-  content;  // 内容
-  complete; // 是否完成
-  edit;     // 是否处于编辑状态
-  show;     // 是否显示（用于查询功能）
-
-  constructor(content){
-    this.id = Math.random();  // id使用随机数，保证每个id唯一
-    this.content = content;
-    this.complete = false;
-    this.edit = false;
-    this.show = true;
-  }
-}
-
-
 const TodoListPage = () => {
-  const [todoItems, settodoItems] = useState([]);
+
+  const [todoItems, settodoItems] = useState([]);   // 用于管理待办事项数据列表
 
   /**
    * 当用户点击编辑按钮时
@@ -114,17 +97,15 @@ const TodoListPage = () => {
    * @param {number} id 当前待办事项的id
    */
   const fetchCompleteTodoItem = (id) => {
-    let original_complete, content;
+    let original_complete;
     Array.from(todoItems).forEach((curItem) => {
       if(curItem.id === id){
         original_complete = curItem.complete;
-        content = curItem.content;
       }
     })
     axiosInst
       .patch("/todos", {
         id,
-        content,
         complete: !original_complete,
       })
       .then(() => {
@@ -142,16 +123,7 @@ const TodoListPage = () => {
     axiosInst
       .get("/todos")
       .then((res) => {
-        settodoItems([]);
-        res.map((curItem) => {
-          const newItem = new TodoItem(curItem.content);
-          newItem.id = curItem._id;
-          newItem.complete = curItem.complete;
-          settodoItems((preItem) => {
-            return [...preItem, newItem];
-          })
-          return curItem;
-      })
+        settodoItems(res);
     })
   }
   
@@ -178,29 +150,21 @@ const TodoListPage = () => {
   }
 
   /**
-   * 当用户在搜索框键入 content ，修改对象的 show 属性
+   * 当用户在搜索框键入 content，向服务器发送 get 请求返回对应的待办事项
    * @param {string} content 待办事项的内容
    */
   const fetchSearchTodoItems = (content) => {
-    let copyTodoItems = Array.from(todoItems);
-    if(content !== ""){
-      copyTodoItems = copyTodoItems.map((curItem) => {
-        curItem.show = (curItem.content.indexOf(content) !== -1);
-        return curItem;
+    axiosInst
+      .get(`/todos?keyword=${content}`)
+      .then((res) => {
+        settodoItems([]);
+        settodoItems(res);
       })
-    }
-    else{
-      copyTodoItems = copyTodoItems.map((curItem) => {
-        curItem.show = true;  // 将每个待办事项的show恢复为默认状态true
-        return curItem;
-      })
-    }
-    settodoItems(copyTodoItems);
   }
 
   return (
     <Layout>
-      <Header style={{backgroundColor: "lightblue"}}>
+      <Header id="header">
         <h1 className="big-title" style={{fontSize: "30px"}}>待办事项管理系统</h1>
       </Header>
       <Content style={{height: "calc(100vh - 64px)"}}>
@@ -220,8 +184,8 @@ const TodoListPage = () => {
           />
         </div>
       </Content>
-      <Footer style={{backgroundColor: "lightblue"}}>
-        <footer id="footer">
+      <Footer id="footer">
+        <footer>
           <div className="copyright" style={{textAlign: "center"}}>
             &copy; Copyright <em>Fan Yihua</em>. All Rights Reserved.
              Contact me through <em>nuaaccstfyh@163.com</em>

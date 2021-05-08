@@ -2,30 +2,7 @@ import React, {useState} from 'react'
 import { Button, Input } from 'antd';
 import { Table, Space } from 'antd';
 import './App.less'
-import axios from "axios"
 import ModalContent from "./ModalContent.jsx"
-
-const axiosInst = axios.create({
-  baseURL: "http://42.193.140.83:3000",
-  timeout: 10000,
-});
-
-axiosInst.interceptors.response.use(
-  function (response) {
-    const {
-      meta: { code, errors },
-      data,
-    } = response.data;
-    if (code !== 0) {
-      alert(errors[0]);
-      return Promise.reject(errors);
-    }
-    return data;
-  },
-  function (errors) {
-    return Promise.reject(errors);
-  }
-);
 
 
 const TodoList = ({todoItems, onClickEditBtn, onClickEditSubmitBtn, onClickDeleteBtn, onClickCompleteBtn}) => {
@@ -80,7 +57,7 @@ const TodoList = ({todoItems, onClickEditBtn, onClickEditSubmitBtn, onClickDelet
               <span style={{textDecoration: (record.complete ? "line-through" : "none")}}>
                 {text}
               </span>
-              <ModalContent content={text} isComplete={record.complete} />
+              <ModalContent content={text} isComplete={record.complete} create={record.create} />
             </div>
           )
         )
@@ -108,7 +85,7 @@ const TodoList = ({todoItems, onClickEditBtn, onClickEditSubmitBtn, onClickDelet
     <div>
       <Table 
         columns={columns} 
-        dataSource={todoItems.filter((curItem) => {return curItem.show === true;})} 
+        dataSource={todoItems} 
         pagination={{position: ["topLeft"], pageSize: 4, showQuickJumper: true}}
         rowKey="id"
         id="table"

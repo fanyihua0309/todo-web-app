@@ -108,8 +108,9 @@ const RegistrationForm = () => {
             message: '请输入手机号码!',
           },
           {
-            pattern: /^1[3|4|5|7|8][0-9]\d{8}$/, 
-            message: '请输入正确的手机号码!'
+            // pattern: /^1[3|4|5|7|8][0-9]\d{8}$/, 
+            type: 'mobile',
+            message: '请输入正确的手机号码!',
           }
         ]}
       >

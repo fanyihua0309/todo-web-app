@@ -51,6 +51,7 @@ class TodoItem{
   complete; // 是否完成
   edit;     // 是否处于编辑状态
   show;     // 是否显示（用于查询功能）
+  create;   // 创建时间（用于查看详情功能）
 
   constructor(content){
     this.id = Math.random();  // id使用随机数，保证每个id唯一
@@ -58,6 +59,7 @@ class TodoItem{
     this.complete = false;
     this.edit = false;
     this.show = true;
+    this.create = "";
   }
 }
 
@@ -147,6 +149,7 @@ const TodoListPage = () => {
           const newItem = new TodoItem(curItem.content);
           newItem.id = curItem._id;
           newItem.complete = curItem.complete;
+          newItem.create = curItem.create.slice(0, 10) + " " + curItem.create.slice(11, -5);
           settodoItems((preItem) => {
             return [...preItem, newItem];
           })
@@ -200,7 +203,7 @@ const TodoListPage = () => {
 
   return (
     <Layout>
-      <Header style={{backgroundColor: "lightblue"}}>
+      <Header id="header">
         <h1 className="big-title" style={{fontSize: "30px"}}>待办事项管理系统</h1>
       </Header>
       <Content style={{height: "calc(100vh - 64px)"}}>
@@ -220,8 +223,8 @@ const TodoListPage = () => {
           />
         </div>
       </Content>
-      <Footer style={{backgroundColor: "lightblue"}}>
-        <footer id="footer">
+      <Footer id="footer">
+        <footer>
           <div className="copyright" style={{textAlign: "center"}}>
             &copy; Copyright <em>Fan Yihua</em>. All Rights Reserved.
              Contact me through <em>nuaaccstfyh@163.com</em>

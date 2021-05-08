@@ -80,7 +80,7 @@ const TodoList = ({todoItems, onClickEditBtn, onClickEditSubmitBtn, onClickDelet
               <span style={{textDecoration: (record.complete ? "line-through" : "none")}}>
                 {text}
               </span>
-              <ModalContent content={text} isComplete={record.complete} />
+              <ModalContent content={text} isComplete={record.complete} create={record.create} />
             </div>
           )
         )

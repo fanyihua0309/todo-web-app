@@ -5,7 +5,7 @@ import { Divider } from 'antd';
 const SignPage = ({ formLable, render, storeToken }) => {
 
   return (
-    <div>
+    <div className="sign-page-div">
       <h1 className="title">待办事项管理系统</h1>
       <div id="sign-form-div">
         <Divider style={{borderWidth: "2px"}}>

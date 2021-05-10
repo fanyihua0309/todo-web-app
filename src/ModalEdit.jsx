@@ -24,7 +24,7 @@ const ModalEdit = ({ content, onClickConfirm }) => {
         编辑
       </Button>
       <Modal title="编辑待办事项" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <Input value={editContent} onChange={(e) => seteditContent(e.target.value)}/>
+        <Input value={editContent} onChange={(e) => seteditContent(e.target.value)} allowClear />
       </Modal>
     </>
   );

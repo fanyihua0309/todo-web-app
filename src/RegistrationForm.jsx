@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Select, Button } from 'antd';
 import { useHistory } from "react-router-dom";
-import { axiosInst } from "./TodoListPage.jsx"
+import axiosInst from './initAxios.js'
 
 
 const { Option } = Select;

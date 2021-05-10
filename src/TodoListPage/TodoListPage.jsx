@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import history from 'history/browser';
-// import history from 'history/hash';
-// import { createHashHistory } from 'history';
 import MyInput from './MyInput.jsx'
 import MySearch from './MySearch.jsx'
 import TodoList from './TodoList.jsx'
@@ -16,7 +13,7 @@ const TodoListPage = () => {
 
   const [todoItems, settodoItems] = useState([]);   // 用于管理待办事项数据列表
 
-    /**
+  /**
    * 请求所有待办事项数据存储到 todoItems 对象数组中
    */
   const fetchAllTodoItems = () => {
@@ -27,14 +24,14 @@ const TodoListPage = () => {
     })
   }
     
-    /**
-     * 在页面加载时发请求获取所有待办事项
-     */
-    useEffect(() => {
-      fetchAllTodoItems();
-    }, [])
+  /**
+   * 本组件被挂载后发请求获取所有待办事项
+   */
+  useEffect(() => {
+    fetchAllTodoItems();
+  }, [])
 
-    /**
+  /**
    * 用户新增一条待办事项时，向服务器发 post 请求
    * @param {string} value 待办事项的内容
    */
@@ -44,39 +41,35 @@ const TodoListPage = () => {
         content: value
       })
       .then(() => {
-        settodoItems([]);
         fetchAllTodoItems();
       })
   }
 
   /**
- * 当用户在搜索框键入 content，向服务器发送 get 请求返回对应的待办事项
- * @param {string} content 待办事项的内容
- */
+   * 当用户在搜索框键入 content，向服务器发送 get 请求返回对应的待办事项
+   * @param {string} content 待办事项的内容
+   */
   const fetchSearchTodoItems = (content) => {
     axiosInst
       .get(`/todos?keyword=${content}`)
       .then((res) => {
-        settodoItems([]);
         settodoItems(res);
       })
   }
-
 
   /**
    * 当用户输入编辑内容完毕，点击提交按钮时，更新服务器对应待办事项的 content
    * @param {number} id 待办事项的 id
    */
   const fetchEditTodoItem = (id, editContent) => {
-  axiosInst
-    .patch("/todos", {
-      id,
-      content: editContent,
-    })
-    .then(() => {
-      settodoItems([]);     // 先将本地的 todoItems 置为空
-      fetchAllTodoItems();  // 请求获取所有的 todoItems，存储到对象数组中
-    })
+    axiosInst
+      .patch("/todos", {
+        id,
+        content: editContent,
+      })
+      .then(() => {
+        fetchAllTodoItems();  // 请求获取所有的 todoItems，存储到对象数组中
+      })
   }
 
   /**
@@ -86,8 +79,7 @@ const TodoListPage = () => {
   const fetchDeleteTodoItem = (id) => {
     axiosInst
       .delete(`todos/${id}`)
-      .then((res) => {
-        settodoItems([]);     // 先将本地的 todoItems 置为空
+      .then(() => {
         fetchAllTodoItems();  // 请求获取所有的 todoItems，存储到对象数组中
       })
   }
@@ -109,7 +101,6 @@ const TodoListPage = () => {
         complete: !original_complete,
       })
       .then(() => {
-        settodoItems([]);
         fetchAllTodoItems();
       });
   }

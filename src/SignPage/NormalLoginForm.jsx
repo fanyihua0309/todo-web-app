@@ -65,7 +65,7 @@ const NormalLoginForm = () => {
           <Checkbox>记住我</Checkbox>
         </Form.Item>
 
-        <Link to="/register">还没有账号？现在注册</Link>
+        <Link to="/sign/up">还没有账号？现在注册</Link>
 
       </Form.Item>
 

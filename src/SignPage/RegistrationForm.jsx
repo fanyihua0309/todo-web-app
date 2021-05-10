@@ -51,7 +51,7 @@ const RegistrationForm = () => {
         password: values.password
       })
       .then(() => {
-        history.push("/register/result");
+        history.push("/sign/up/result");
       })
     
     // console.log('Received values of form: ', values);

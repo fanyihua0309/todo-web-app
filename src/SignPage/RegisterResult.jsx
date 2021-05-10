@@ -5,7 +5,7 @@ const RegisterResult = () => {
   let history = useHistory();
   console.log(history);
   const handleClick = () => {
-    history.push("/login");
+    history.push("/sign/in");
   }
   return (
     <Result

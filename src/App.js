@@ -2,18 +2,12 @@ import React from "react";
 import {
   // BrowserRouter as Router,
   HashRouter as Router,
-  // Router,
   Switch,
   Route,
+  Redirect,
 } from "react-router-dom";
-// import SignPage from "./SignPage/SignPage.jsx"
-// import SignPage from "./SignPage"
-// import RegisterResult from "./SignPage/RegisterResult"
-// import TodoListPage from "./TodoListPage/TodoListPage.jsx"
-import TodoListPage from "./TodoListPage"
 import SignPageRoute from "./SignPage"
-// import NormalLoginForm from "./SignPage/NormalLoginForm.jsx"
-// import RegistrationForm from "./SignPage/RegistrationForm.jsx"
+import TodoListPage from "./TodoListPage"
 import "./App.less"
 
 
@@ -23,29 +17,17 @@ function App() {
     <Router>
       <div>
         <Switch>
-          {/* <Route path="/login">
-            <SignPage formLable="欢 迎 登 录" render={<NormalLoginForm />} className="sign-page" />
-          </Route>
-
-          <Route path="/register/result">
-            <SignPage formLable="注 册 结 果" render={<RegisterResult />} />
-          </Route>
-
-          <Route path="/register">
-            <SignPage formLable="注 册 账 户" render={<RegistrationForm />} />
-          </Route> */}
           
-          <Route exact path="/">
+          <Route path="/sign">
             <SignPageRoute />
           </Route>
 
           <Route path="/todolist">
-            <TodoListPage id="todolist-page" />
+            <TodoListPage />
           </Route>
 
-          {/* <Route path="/">  
-            <SignPage formLable="欢 迎 登 录" render={<NormalLoginForm />} />
-          </Route> */}
+          <Redirect to="/sign" />
+
         </Switch>
       </div>
     </Router>

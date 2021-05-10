@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# todo-web-app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 一、项目简介
 
-## Available Scripts
+**项目简介**：基于 React 框架开发的待办事项管理系统单页应用，实现用户的注册、登录，待办事项的基本展示、查看详情、新建、查询、编辑、更改完成状态、删除等功能
 
-In the project directory, you can run:
+**相关技术**：React 框架、Ant Design UI 组件库、React-Router 做路由管理、axios 做网络请求
 
-### `npm start`
+已部署于腾讯服务器，可通过以下URL访问前端应用：
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+http://42.193.140.83:3000/
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 二、项目运行
 
-### `npm run build`
+本项目运行命令：
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+npm start
+再访问 http://localhost:3000 即可 
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+如何创建 React 项目、在初始项目模板中配置路由、配置 less 引入  Ant Design UI组件库，可以参考笔者博文：
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+https://blog.csdn.net/weixin_44589540/article/details/116421476
+```
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 三、其他说明
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+此项目从另一个  repository 移过来，故 git 记录不完整。原  repository 记录了待办事项管理系统的1.0~3.0版本，从实现基本功能，到美化样式和优化功能，再到实现本地存储方案。若有需要，详见项目地址：
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+https://github.com/fanyihua0309/easy-todo-web-app.git
+```
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

@@ -1,11 +1,13 @@
 import React, {useState} from 'react'
 import { Input } from 'antd';
-import "./App.less"
+import "../App.less"
 
-const MyInput = ({placeholder, onClickEnter}) => {
+const { Search } = Input;
+
+const MySearch = ({placeholder, onClickEnter}) => {
 
   const [content, setcontent] = useState("");
-
+  
   /**
    * 存储用户在输入框中输入的内容
    * @param {*} e onChange传递的事件参数
@@ -16,10 +18,11 @@ const MyInput = ({placeholder, onClickEnter}) => {
 
 
   return (
-    <Input 
+      <Search
       className="myInput" 
       size="large"
       allowClear
+      enterButton
       placeholder={placeholder}
       onChange={storeContent} 
       onPressEnter={() => onClickEnter(content)}
@@ -27,4 +30,4 @@ const MyInput = ({placeholder, onClickEnter}) => {
   )
 }
 
-export default MyInput;
+export default MySearch;

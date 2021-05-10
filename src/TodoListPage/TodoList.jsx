@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from 'antd';
 import { Table, Space } from 'antd';
-import './App.less'
+import '../App.less'
 import ModalEdit from "./ModalEdit.jsx"
 import ModalDetails from './ModalDetails.jsx';
 

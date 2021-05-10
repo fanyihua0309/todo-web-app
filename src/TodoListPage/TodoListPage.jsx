@@ -5,9 +5,9 @@ import React, { useState, useEffect } from "react";
 import MyInput from './MyInput.jsx'
 import MySearch from './MySearch.jsx'
 import TodoList from './TodoList.jsx'
-import './App.less'
+import '../App.less'
 import { Layout } from 'antd';
-import axiosInst from './initAxios.js'
+import axiosInst from '../initAxios.js'
 
 
 const { Header, Footer, Content } = Layout;
@@ -116,11 +116,11 @@ const TodoListPage = () => {
 
 
   return (
-    <Layout>
+    <Layout style={{width: "100%"}}>
       <Header id="header">
         <h1 className="big-title" style={{fontSize: "30px"}}>待办事项管理系统</h1>
       </Header>
-      <Content style={{height: "calc(100vh - 64px)"}}>
+      <Content style={{height: "calc(100vh - 64px)", backgroundColor: "white"}}>
         <div>
           <MyInput placeholder="按回车新建待办事项" onClickEnter={fetchAddTodoItem}/>
           <MySearch placeholder="按回车搜索待办事项" onClickEnter={fetchSearchTodoItems}/>

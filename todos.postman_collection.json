@@ -1,0 +1,210 @@
+{
+	"info": {
+		"_postman_id": "5ae4ed47-261b-4322-a341-e87170c76c8f",
+		"name": "todos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "用户注册",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"华崽\",\n    \"password\":\"123456\",\n    \"email\":\"18106987199@163.com\",\n    \"mobile\":\"18106987199\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://42.193.140.83:3001/users/signup",
+					"protocol": "http",
+					"host": [
+						"42",
+						"193",
+						"140",
+						"83"
+					],
+					"port": "3001",
+					"path": [
+						"users",
+						"signup"
+					]
+				},
+				"description": "用户注册"
+			},
+			"response": []
+		},
+		{
+			"name": "用户登录",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"华崽\",\n    \"password\":\"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://42.193.140.83:3001/users/signin",
+					"protocol": "http",
+					"host": [
+						"42",
+						"193",
+						"140",
+						"83"
+					],
+					"port": "3001",
+					"path": [
+						"users",
+						"signin"
+					]
+				},
+				"description": "用户登录"
+			},
+			"response": []
+		},
+		{
+			"name": "查询列表",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IuWNjuW0vSIsImlkIjoiNjA5M2I4ZTMyZGFkMWUxZTM2NjZiNDA1IiwiaWF0IjoxNjIwMjkzODcxfQ.NoxMYAT5aJ3vc_GzW29IuSFEn6pJ8CfeJtf5Z4BKZ4I",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://42.193.140.83:3001/todos/6093b91a2dad1e1e3666b406",
+					"protocol": "http",
+					"host": [
+						"42",
+						"193",
+						"140",
+						"83"
+					],
+					"port": "3001",
+					"path": [
+						"todos",
+						"6093b91a2dad1e1e3666b406"
+					]
+				},
+				"description": "获取待办事项列表"
+			},
+			"response": []
+		},
+		{
+			"name": "创建待办事项",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IuWNjuW0vSIsImlkIjoiNjA5M2I4ZTMyZGFkMWUxZTM2NjZiNDA1IiwiaWF0IjoxNjIwMjkzODcxfQ.NoxMYAT5aJ3vc_GzW29IuSFEn6pJ8CfeJtf5Z4BKZ4I",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"华崽将要去考试\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://42.193.140.83:3001/todos",
+					"protocol": "http",
+					"host": [
+						"42",
+						"193",
+						"140",
+						"83"
+					],
+					"port": "3001",
+					"path": [
+						"todos"
+					]
+				},
+				"description": "创建待办事项"
+			},
+			"response": []
+		},
+		{
+			"name": "修改待办事项",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IuWNjuW0vSIsImlkIjoiNjA5M2I4ZTMyZGFkMWUxZTM2NjZiNDA1IiwiaWF0IjoxNjIwMjkzODcxfQ.NoxMYAT5aJ3vc_GzW29IuSFEn6pJ8CfeJtf5Z4BKZ4I",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"6093b93f2dad1e1e3666b407\",\n    \"content\": \"修改测试测试测试\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://42.193.140.83:3001/todos",
+					"protocol": "http",
+					"host": [
+						"42",
+						"193",
+						"140",
+						"83"
+					],
+					"port": "3001",
+					"path": [
+						"todos"
+					]
+				},
+				"description": "更新待办事项"
+			},
+			"response": []
+		},
+		{
+			"name": "删除待办事项",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IuWNjuW0vSIsImlkIjoiNjA5M2I4ZTMyZGFkMWUxZTM2NjZiNDA1IiwiaWF0IjoxNjIwMjkzODcxfQ.NoxMYAT5aJ3vc_GzW29IuSFEn6pJ8CfeJtf5Z4BKZ4I",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://42.193.140.83:3001/todos/6093b93f2dad1e1e3666b407",
+					"protocol": "http",
+					"host": [
+						"42",
+						"193",
+						"140",
+						"83"
+					],
+					"port": "3001",
+					"path": [
+						"todos",
+						"6093b93f2dad1e1e3666b407"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
